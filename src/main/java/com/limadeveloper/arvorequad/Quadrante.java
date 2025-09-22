@@ -4,10 +4,35 @@
  */
 package com.limadeveloper.arvorequad;
 
+import com.limadeveloper.listaencadeada.ListaEncadeada;
+
 /**
  *
  * @author Lima
  */
 public class Quadrante {
+    private int num_max_nodes;
+    private ListaEncadeada nodes;
+    private int x0;
+    private int y0;
+    private int largura;
+    private int altura;
+    
+    public Quadrante(int x0, int y0, int largura, int altura){
+        this.nodes = new ListaEncadeada();
+        this.x0 = x0;
+        this.y0 = y0;
+        this.largura = largura;
+        this.altura = altura;
+    }
+    
+    public Quadrante(int num_max_nodes, int x0, int y0, int largura, int altura){
+        this.nodes = new ListaEncadeada(num_max_nodes);
+        this.x0 = x0;
+        this.y0 = y0;
+        this.largura = largura;
+        this.altura = altura;
+    }
+    
     
 }

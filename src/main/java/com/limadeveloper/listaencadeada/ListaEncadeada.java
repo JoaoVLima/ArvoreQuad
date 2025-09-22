@@ -187,12 +187,16 @@ public class ListaEncadeada {
         
         Node atual = Lista;
         Node maior = no;
+        boolean x_encontrado = false;
         
         while (atual.getProximo() != null) {
             
-            if(atual.getX()<x){
+            if(x_encontrado == false && atual.getX()<x){
                 maior = atual;
-            }else if(atual.getY()<y){
+            }else if(atual.getX()==x){
+                maior = atual;
+                x_encontrado = true;
+            }else if(atual.getX()<=x && atual.getY()<y){
                 maior = atual;
             }
             
