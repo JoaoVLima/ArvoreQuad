@@ -9,8 +9,7 @@ package com.limadeveloper.arvorequad;
  * @author Lima
  */
 public class ArvoreQuad {
-
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
+    ArvoreQuad(){
+        System.out.println("sou uma arvore multiway");
     }
 }
