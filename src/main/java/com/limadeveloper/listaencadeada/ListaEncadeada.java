@@ -191,11 +191,14 @@ public class ListaEncadeada {
         
         while (atual.getProximo() != null) {
             
-            if(x_encontrado == false && atual.getX()<x){
-                maior = atual;
-            }else if(atual.getX()==x){
+            if(atual.getX()==x){
                 maior = atual;
                 x_encontrado = true;
+                if (atual.getY()< y){
+                    break;
+                }
+            }else if(x_encontrado == false && atual.getX()<x){
+                maior = atual;
             }else if(atual.getX()<=x && atual.getY()<y){
                 maior = atual;
             }
@@ -219,94 +222,114 @@ public class ListaEncadeada {
     }
     
     //Removendo elementos
-//    public Integer remove(int indice){
-//        if(vazia()){
-//            return null;
-//        }
-//        if(indice==0){
-//            return removePrimeiro();
-//        }
-//        
-//        Node atual = Lista;
-//        Node atualProximo = atual.getProximo();
-//        Node node_removido;
-//        
-//        if(atualProximo == null){
-//            node_removido = atual);
-//            Lista = null;
-//            return info;
-//        }
-//        
-//        while (atualProximo!=null && atualProximo.getProximo() != null) {
-//            atual = atual.getProximo();
-//            atualProximo = atual.getProximo();
-//        }
-//        
-//        info = atualProximo.getInformacao();
-//        atual.setProximo(null);
-//        return info;
-//    }
-//    
-//    public Integer remove(Node node){
-//        if(vazia()){
-//            return null;
-//        }
-//        if(node==Lista){
-//            return removePrimeiro();
-//        }
-//        
-//        Node atual = Lista;
-//        Node atualProximo = atual.getProximo();
-//        
-//        Integer info = null;
-//        
-//        while (atual.getProximo() != null && atual!=node) {
-//            atual = atual.getProximo();
-//        }
-//        
-//        info = atual.getInformacao();
-//        atual.setProximo(null);
-//        
-//        return info;
-//    }
-//    
-//    Integer removePrimeiro(){
-//        if(vazia()){
-//            return null;
-//        }
-//        Integer info = Lista.getInformacao();
-//        Node proximo = Lista.getProximo();
-//        
-//        
-//        Lista = proximo;
-//        return info;
-//        
-//    }
-//    
-//    Integer removeUltimo(){
-//        if(vazia()){
-//            return null;
-//        }
-//        
-//        Node atual = Lista;
-//        Node atualProximo = atual.getProximo();
-//        Integer info;
-//        
-//        if(atualProximo == null){
-//            info = atual.getInformacao();
-//            Lista = null;
-//            return info;
-//        }
-//        
-//        while (atualProximo!=null && atualProximo.getProximo() != null) {
-//            atual = atual.getProximo();
-//            atualProximo = atual.getProximo();
-//        }
-//        
-//        info = atualProximo.getInformacao();
-//        atual.setProximo(null);
-//        return info;
-//    }
+    public Node remove(int indice){
+        if(vazia()){
+            return null;
+        }
+        if(indice==0){
+            return removePrimeiro();
+        }
+        
+        Node atual = Lista;
+        Node atualProximo = atual.getProximo();
+        Node node_removido;
+        
+        if(atualProximo == null){
+            node_removido = atual;
+            Lista = null;
+            return node_removido;
+        }
+        
+        while (atualProximo!=null && atualProximo.getProximo() != null) {
+            atual = atual.getProximo();
+            atualProximo = atual.getProximo();
+        }
+        
+        atual.setProximo(null);
+        return atualProximo;
+    }
+    
+    public Node remove(Integer x, Integer y){
+        if(vazia()){
+            return null;
+        }
+        
+        Node atual = Lista;
+        Node atualProximo = atual.getProximo();
+        Node node_removido;
+        
+        if(atualProximo == null){
+            node_removido = atual;
+            Lista = null;
+            return node_removido;
+        }
+        
+        
+        while ((atualProximo!=null && atualProximo.getProximo() != null) 
+               || (atualProximo.getX()==x && atualProximo.getY()==y)) {
+            atual = atual.getProximo();
+            atualProximo = atual.getProximo();
+        }
+        
+        atual.setProximo(atualProximo.getProximo());
+        return atualProximo;
+    }
+    
+    public Node remove(Node node){
+        if(vazia()){
+            return null;
+        }
+        if(node==Lista){
+            return removePrimeiro();
+        }
+        
+        Node atual = Lista;
+        Node atualProximo = atual.getProximo();
+        
+        while (atual.getProximo() != null && atual!=node) {
+            atual = atual.getProximo();
+        }
+        
+        atual.setProximo(null);
+        
+        return atual;
+    }
+    
+    public Node removePrimeiro(){
+        if(vazia()){
+            return null;
+        }
+        Node node_removido = Lista;
+        Node proximo = Lista.getProximo();
+        
+        
+        Lista = proximo;
+        return node_removido;
+        
+    }
+    
+    public Node removeUltimo(){
+        if(vazia()){
+            return null;
+        }
+        
+        Node atual = Lista;
+        Node atualProximo = atual.getProximo();
+        Integer info;
+        
+        if(atualProximo == null){
+            Lista = null;
+            return atual;
+        }
+        
+        while (atualProximo!=null && atualProximo.getProximo() != null) {
+            atual = atual.getProximo();
+            atualProximo = atual.getProximo();
+        }
+        
+        atual.setProximo(null);
+        return atualProximo;
+    }
     
     //Imprimindo elementos
     public void imprime() {

@@ -34,5 +34,18 @@ public class Quadrante {
         this.altura = altura;
     }
     
+    public void inserir(int x, int y){
+        nodes.insereOrdenado(x, y);
+        System.out.println("node inserido");
+    }
+    
+    public void remover(int x, int y){
+        nodes.remove(x, y);
+    }
+    
+    public void imprimir(){
+        nodes.imprime();
+    }
+    
     
 }

@@ -4,8 +4,6 @@
  */
 package com.limadeveloper.arvorequad;
 
-import com.limadeveloper.listaencadeada.ListaEncadeada;
-
 /**
  *
  * @author Lima
@@ -13,6 +11,7 @@ import com.limadeveloper.listaencadeada.ListaEncadeada;
 public class Main {
     
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        ArvoreQuad arvore = new ArvoreQuad(100, 0, 0, 100, 100);
+        arvore.imprimir();
     }
 }
