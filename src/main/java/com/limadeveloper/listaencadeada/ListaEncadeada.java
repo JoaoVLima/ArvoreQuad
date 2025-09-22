@@ -14,11 +14,13 @@ public class ListaEncadeada {
 
     public ListaEncadeada() {
         this.Lista = null;
+        this.num_nodes = 0;
         this.capacidade = null;
     }
     
     public ListaEncadeada(int capacidade) {
         this.Lista = null;
+        this.num_nodes = 0;
         this.capacidade = capacidade;
     }
     
@@ -28,17 +30,27 @@ public class ListaEncadeada {
     }
     
     public boolean cheia(){
-        
+        if(capacidade!=null){
+            return num_nodes >= capacidade;
+        }else{
+            return false;
+        }
     }
 
     //Inserindo elementos
     public void insereUltimo(int x, int y) {
+        if (cheia()){
+            System.out.println("Lista cheia");
+            return;
+        }
+        
         //Declarando nosso novo nó
         Node no = new Node();
         no.setX(x);
         no.setY(y);
         if (vazia()) {
             Lista = no;
+            num_nodes++;
         } else {
             //Aqui se cria um apontador para a lista.
             Node atual = Lista;
@@ -46,29 +58,41 @@ public class ListaEncadeada {
                 atual = atual.getProximo();
             }
             atual.setProximo(no);
+            num_nodes++;
             System.out.println("Nó atual no endereço" + atual);
         }
     }
     
     public void inserePrimeiro(int x, int y){
+        if (cheia()){
+            System.out.println("Lista cheia");
+            return;
+        }
         Node no = new Node();
         no.setX(x);
         no.setY(y);
         if (vazia()) {
             Lista = no;
+            num_nodes++;
         } else {
             Node atual = Lista;
             no.setProximo(atual);
             Lista = no;
+            num_nodes++;
         }
     }
     
     public void insereDepois(int indice, int x, int y){
+        if (cheia()){
+            System.out.println("Lista cheia");
+            return;
+        }
         Node no = new Node();
         no.setX(x);
         no.setY(y);
         if (vazia()) {
             Lista = no;
+            num_nodes++;
         }else if(indice==0){
             inserePrimeiro(x,y);
         }else {
@@ -85,6 +109,7 @@ public class ListaEncadeada {
             }else{
                 no.setProximo(atualProximo);
                 atual.setProximo(no);
+                num_nodes++;
                 System.out.println("Nó atual no endereço" + atual);
             }
         }
@@ -92,14 +117,17 @@ public class ListaEncadeada {
     }
     
     public void insereDepois(Node node, int x, int y){
+        if (cheia()){
+            System.out.println("Lista cheia");
+            return;
+        }
         Node no = new Node();
         no.setX(x);
         no.setY(y);
         if (vazia()) {
             Lista = no;
-        }else if(node==Lista){
-            inserePrimeiro(x,y);
-        }else {
+            num_nodes++;
+        }else{
             Node atual = Lista;
             Node atualProximo = atual.getProximo();
             while (atualProximo != null && node!=atual) {
@@ -111,12 +139,17 @@ public class ListaEncadeada {
             }else{
                 no.setProximo(atualProximo);
                 atual.setProximo(no);
+                num_nodes++;
                 System.out.println("Nó atual no endereço" + atual);
             }
         }
     }
     
     public void insereOrdenado(int x, int y){
+        if (cheia()){
+            System.out.println("Lista cheia");
+            return;
+        }
         
         // [(1,3),(1,5),(2,2),(3,1)]
         // (1,4)
