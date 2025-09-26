@@ -146,11 +146,6 @@ public class ListaEncadeada {
     }
     
     public void insereOrdenado(int x, int y){
-        if (cheia()){
-            System.out.println("Lista cheia");
-            return;
-        }
-        
         // [(1,3),(1,5),(2,2),(3,1)]
         // (1,4)
         // [(1,3),(1,4),(1,5),(2,2),(3,1)]
@@ -163,43 +158,28 @@ public class ListaEncadeada {
         // (2,4)
         // [(0,9),(1,3),(1,4),(1,5),(2,2),(2,4),(2,4),(3,1),(10,10)]
         
-        // to ignorando valores negativos por enquanto meu canvas vai de 0,0 a inf,inf
         
-        // explicacao antiga com apenas um int
-        //[1,3,4,5,6,10]
-        //2
-        //[1,2,3,4,5,6,10]
-        //40
-        //[1,2,3,4,5,6,10,40]
-        //9
-        //[1,2,3,4,5,6,9,10,40]
-        //0
-        //[0,1,2,3,4,5,6,9,10,40]
-        
-        if(vazia()){
+        if (cheia()){
+            System.out.println("Lista cheia");
+            return;
+        }else if (vazia()){
             inserePrimeiro(x,y);
             return;
         }
         
         Node no = new Node();
-        no.setX(null);
-        no.setY(null);
-        
+        no.setX(-1);
+        no.setY(-1);
+
         Node atual = Lista;
         Node maior = no;
-        boolean x_encontrado = false;
+        
         
         while (atual.getProximo() != null) {
             
-            if(atual.getX()==x){
-                maior = atual;
-                x_encontrado = true;
-                if (atual.getY()< y){
-                    break;
-                }
-            }else if(x_encontrado == false && atual.getX()<x){
-                maior = atual;
-            }else if(atual.getX()<=x && atual.getY()<y){
+            if((atual.getX()<x && atual.getY()<y)
+                    && 
+               (x>maior.getX() && y>maior.getY())){
                 maior = atual;
             }
             
@@ -207,16 +187,16 @@ public class ListaEncadeada {
             atual = atual.getProximo();
         }
         
-        if(atual.getX()<x){
-            maior = atual;
-        }else if(atual.getY()<y){
+        if((atual.getX()<x && atual.getY()<y)
+                && 
+           (x>maior.getX() && y>maior.getY())){
             maior = atual;
         }
         
-        if(maior.getX()==null && maior.getY()==null ){
-            inserePrimeiro(x,y);
+        if(maior.getX()==-1 && maior.getY()==-1){
+            inserePrimeiro(x, y);
         }else{
-            insereDepois(maior, x,y);
+            insereDepois(maior, x, y);
         }
         
     }
