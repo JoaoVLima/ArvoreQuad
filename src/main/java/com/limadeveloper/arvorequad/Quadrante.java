@@ -27,6 +27,7 @@ public class Quadrante {
     }
     
     public Quadrante(int num_max_nodes, int x0, int y0, int largura, int altura){
+        this.num_max_nodes = num_max_nodes;
         this.nodes = new ListaEncadeada(num_max_nodes);
         this.x0 = x0;
         this.y0 = y0;
@@ -34,9 +35,17 @@ public class Quadrante {
         this.altura = altura;
     }
     
+    public int getX0(){
+        return x0;
+    }
+    
+    public int getY0(){
+        return y0;
+    }
+    
     public void inserir(int x, int y){
         nodes.insereOrdenado(x, y);
-        System.out.println("node inserido");
+        num_max_nodes++;
     }
     
     public void remover(int x, int y){
