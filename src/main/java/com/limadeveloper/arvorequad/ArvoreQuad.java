@@ -4,8 +4,6 @@
 
 package com.limadeveloper.arvorequad;
 
-import com.limadeveloper.listaencadeada.ListaEncadeada;
-
 /**
  *
  * @author Lima

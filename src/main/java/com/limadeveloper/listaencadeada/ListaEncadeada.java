@@ -177,19 +177,18 @@ public class ListaEncadeada {
         
         while (atual.getProximo() != null) {
             
-            if((atual.getX()<x && atual.getY()<y)
+            if((atual.getX()<x || (atual.getX()<=x && atual.getY()<y))
                     && 
-               (x>maior.getX() && y>maior.getY())){
+               (x>maior.getX() || (x>=maior.getX() && y>maior.getY()))){
                 maior = atual;
             }
             
-            
             atual = atual.getProximo();
         }
-        
-        if((atual.getX()<x && atual.getY()<y)
+         
+        if((atual.getX()<x || (atual.getX()<=x && atual.getY()<y))
                 && 
-           (x>maior.getX() && y>maior.getY())){
+           (x>maior.getX() || (x>=maior.getX() && y>maior.getY()))){
             maior = atual;
         }
         
