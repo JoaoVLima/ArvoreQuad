@@ -244,10 +244,12 @@ public class ListaEncadeada {
         }
         
         
-        while ((atualProximo!=null && atualProximo.getProximo() != null) 
-               || (atualProximo.getX()==x && atualProximo.getY()==y)) {
+        while (atualProximo!=null && atualProximo.getProximo() != null) {
             atual = atual.getProximo();
             atualProximo = atual.getProximo();
+            if (atualProximo.getX()==x && atualProximo.getY()==y){
+                break;
+            }
         }
         
         atual.setProximo(atualProximo.getProximo());
