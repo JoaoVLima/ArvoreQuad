@@ -4,6 +4,8 @@
 
 package com.limadeveloper.arvorequad;
 
+import com.limadeveloper.listaencadeada.Node;
+
 /**
  *
  * @author Lima
@@ -57,8 +59,62 @@ public class ArvoreQuad {
             }
         }else{
             retorno = quadrante.inserir(x,y);
+            if (!retorno){
+                if (quadrante.cheia()){
+                    System.out.println("Dividir");
+                    dividir();
+                    retorno = inserir(x,y);
+                }
+            }
         }
         return retorno;
+    }
+    
+    public void dividir(){
+        if(dividido){
+            System.out.println("ja ta dividido, loco");
+            return; 
+        }
+        int num_max_nodes = quadrante.getNumMaxNodes();
+        int x0 = quadrante.getX0();
+        int y0 = quadrante.getY0();
+        int largura = quadrante.getLargura();
+        int altura = quadrante.getAltura();
+        
+        int metade_x = (int) largura-x0/2;
+        int metade_y = (int) altura-y0/2;
+        
+        int esquerda_cima_x0 = x0;
+        int esquerda_cima_y0 = y0;
+        int esquerda_cima_largura = metade_x;
+        int esquerda_cima_altura = metade_y;
+        
+        int direita_cima_x0 = metade_x;
+        int direita_cima_y0 = y0;
+        int direita_cima_largura = metade_x;
+        int direita_cima_altura = metade_y;
+        
+        int esquerda_baixo_y0 = metade_y;
+        int esquerda_baixo_x0 = x0;
+        int esquerda_baixo_largura = metade_x;
+        int esquerda_baixo_altura = metade_y;
+        
+        int direita_baixo_x0 = metade_x;
+        int direita_baixo_y0 = metade_y;
+        int direita_baixo_largura = metade_x;
+        int direita_baixo_altura = metade_y;
+        
+        esquerda_cima = new ArvoreQuad(num_max_nodes,esquerda_cima_x0,esquerda_cima_y0,esquerda_cima_largura, esquerda_cima_altura);
+        direita_cima = new ArvoreQuad(num_max_nodes,direita_cima_x0,direita_cima_y0,direita_cima_largura,direita_cima_altura);
+        esquerda_baixo = new ArvoreQuad(num_max_nodes,esquerda_baixo_x0,esquerda_baixo_y0,esquerda_baixo_largura,esquerda_baixo_altura);
+        direita_baixo = new ArvoreQuad(num_max_nodes,direita_baixo_x0,direita_baixo_y0,direita_baixo_largura,direita_baixo_altura);
+        
+        Node no = quadrante.removerPrimeiro();
+        while(no!=null){
+            
+            no = quadrante.removerPrimeiro();
+        }
+        
     }
     
     public void imprimir(){

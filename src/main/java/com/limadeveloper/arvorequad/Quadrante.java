@@ -5,6 +5,7 @@
 package com.limadeveloper.arvorequad;
 
 import com.limadeveloper.listaencadeada.ListaEncadeada;
+import com.limadeveloper.listaencadeada.Node;
 
 /**
  *
@@ -35,6 +36,10 @@ public class Quadrante {
         this.altura = altura;
     }
     
+    public boolean cheia(){
+        return nodes.cheia();
+    }
+    
     public boolean taNoQuadrante(int x, int y){
         return (x>=x0 && x<=largura) && (y>=y0 && y<=altura);
     }
@@ -45,6 +50,22 @@ public class Quadrante {
     
     public int getY0(){
         return y0;
+    }
+    
+    public int getLargura(){
+        return largura;
+    }
+    
+    public int getAltura(){
+        return altura;
+    }
+    
+    public int getNumMaxNodes(){
+        return num_max_nodes;
+    }
+    
+    public Node removerPrimeiro(){
+        return nodes.removePrimeiro();
     }
     
     public boolean inserir(int x, int y){
