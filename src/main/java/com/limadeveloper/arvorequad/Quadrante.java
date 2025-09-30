@@ -19,14 +19,6 @@ public class Quadrante {
     private int largura;
     private int altura;
     
-    public Quadrante(int x0, int y0, int largura, int altura){
-        this.nodes = new ListaEncadeada();
-        this.x0 = x0;
-        this.y0 = y0;
-        this.largura = largura;
-        this.altura = altura;
-    }
-    
     public Quadrante(int num_max_nodes, int x0, int y0, int largura, int altura){
         this.num_max_nodes = num_max_nodes;
         this.nodes = new ListaEncadeada(num_max_nodes);
@@ -78,7 +70,6 @@ public class Quadrante {
             return false;
         }
         nodes.insereOrdenado(x, y);
-        num_max_nodes++;
         return true;
         
         
@@ -89,6 +80,11 @@ public class Quadrante {
     }
     
     public void imprimir(){
+        nodes.imprime();
+    }
+    
+    public void imprimir(int count){
+        System.out.print("\t".repeat(count));
         nodes.imprime();
     }
     
