@@ -36,7 +36,7 @@ public class Quadrante {
     }
     
     public boolean taNoQuadrante(int x, int y){
-        return (x>x0 && x<largura) && (y>y0 && y<altura);
+        return (x>=x0 && x<=largura) && (y>=y0 && y<=altura);
     }
     
     public int getX0(){
@@ -47,17 +47,18 @@ public class Quadrante {
         return y0;
     }
     
-    public void inserir(int x, int y){
+    public boolean inserir(int x, int y){
         if(nodes.cheia()){
             System.out.println("ta cheia");
-            return;
+            return false;
         }
         if(!taNoQuadrante(x,y)){
             System.out.println("não é aqui não");
-            return;
+            return false;
         }
         nodes.insereOrdenado(x, y);
         num_max_nodes++;
+        return true;
         
         
     }

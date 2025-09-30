@@ -11,7 +11,12 @@ package com.limadeveloper.arvorequad;
 public class Main {
     
     public static void main(String[] args) {
-        ArvoreQuad arvore = new ArvoreQuad(100, 0, 0, 100, 100);
+        ArvoreQuad arvore = new ArvoreQuad(4, 0, 0, 100, 100);
+        arvore.inserir(10,10);
+        arvore.inserir(20,20);
+        arvore.inserir(60,60);
+        arvore.inserir(70,70);
+        arvore.inserir(0,50);
         arvore.imprimir();
     }
 }

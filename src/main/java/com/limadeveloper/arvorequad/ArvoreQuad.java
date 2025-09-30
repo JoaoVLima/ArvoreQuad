@@ -41,22 +41,24 @@ public class ArvoreQuad {
         }
     }
     
-    public void inserir(int x, int y){
+    public boolean inserir(int x, int y){
+        boolean retorno = false;
         if(dividido){
             if (esquerda_cima.taNoQuadrante(x,y)){
-                esquerda_cima.inserir(x, y);
+                retorno = esquerda_cima.inserir(x, y);
             }else if (direita_cima.taNoQuadrante(x,y)){
-                direita_cima.inserir(x, y);
+                retorno = direita_cima.inserir(x, y);
             }else if (esquerda_baixo.taNoQuadrante(x,y)){
-                esquerda_baixo.inserir(x, y);
+                retorno = esquerda_baixo.inserir(x, y);
             }else if (direita_baixo.taNoQuadrante(x,y)){
-                direita_baixo.inserir(x, y);
+                retorno = direita_baixo.inserir(x, y);
             }else{
                 System.out.println("não é aqui não");
             }
         }else{
-            quadrante.inserir(x,y);
+            retorno = quadrante.inserir(x,y);
         }
+        return retorno;
     }
     
     public void imprimir(){
