@@ -20,42 +20,51 @@ public class ArvoreQuad {
     
     ArvoreQuad(int num_max_nodes, int x0, int y0, int largura, int altura){
         this.quadrante = new Quadrante(num_max_nodes, x0, y0, largura, altura);
-        this.quadrante.inserir(0, 0);
-        this.quadrante.imprimir();
-        this.quadrante.remover(0, 0);
-        this.quadrante.imprimir();
-        this.quadrante.inserir(0, 0);
-        this.quadrante.imprimir();
-        this.quadrante.inserir(10, 10);
-        this.quadrante.imprimir();
-        this.quadrante.inserir(20, 20);
-        this.quadrante.imprimir();
-        this.quadrante.inserir(30, 30);
-        this.quadrante.imprimir();
-        this.quadrante.inserir(100, 100);
-        this.quadrante.imprimir();
-        this.quadrante.inserir(33, 41);
-        this.quadrante.imprimir();
-        this.quadrante.inserir(33, 40);
-        this.quadrante.imprimir();
-        this.quadrante.inserir(20, 40);
-        this.quadrante.imprimir();
-        this.quadrante.inserir(20, 30);
-        this.quadrante.imprimir();
-        this.quadrante.inserir(10, 30);
-        this.quadrante.imprimir();
-        this.quadrante.inserir(10, 40);
-        this.quadrante.imprimir();
-        this.quadrante.remover(10, 40);
-        this.quadrante.imprimir();
+    }
+    
+    public boolean taNoQuadrante(int x, int y){
+        if(dividido){
+            if (esquerda_cima.taNoQuadrante(x,y)){
+                return esquerda_cima.taNoQuadrante(x,y);
+            }else if (direita_cima.taNoQuadrante(x,y)){
+                return direita_cima.taNoQuadrante(x,y);
+            }else if (esquerda_baixo.taNoQuadrante(x,y)){
+                return esquerda_baixo.taNoQuadrante(x,y);
+            }else if (direita_baixo.taNoQuadrante(x,y)){
+                return direita_baixo.taNoQuadrante(x,y);
+            }else{
+                System.out.println("não é aqui não");
+                return false;
+            }
+        }else{
+            return quadrante.taNoQuadrante(x,y);
+        }
+    }
+    
+    public void inserir(int x, int y){
+        if(dividido){
+            if (esquerda_cima.taNoQuadrante(x,y)){
+                esquerda_cima.inserir(x, y);
+            }else if (direita_cima.taNoQuadrante(x,y)){
+                direita_cima.inserir(x, y);
+            }else if (esquerda_baixo.taNoQuadrante(x,y)){
+                esquerda_baixo.inserir(x, y);
+            }else if (direita_baixo.taNoQuadrante(x,y)){
+                direita_baixo.inserir(x, y);
+            }else{
+                System.out.println("não é aqui não");
+            }
+        }else{
+            quadrante.inserir(x,y);
+        }
     }
     
     public void imprimir(){
         if(dividido){
-           esquerda_cima.imprimir();
-           direita_cima.imprimir();
-           esquerda_baixo.imprimir();
-           direita_baixo.imprimir();
+            esquerda_cima.imprimir();
+            direita_cima.imprimir();
+            esquerda_baixo.imprimir();
+            direita_baixo.imprimir();
         }else{
             quadrante.imprimir();
         }
