@@ -33,7 +33,7 @@ public class Quadrante {
     }
     
     public boolean taNoQuadrante(int x, int y){
-        return (x>=x0 && x<=largura) && (y>=y0 && y<=altura);
+        return (x>=x0 && x<=x0+largura) && (y>=y0 && y<=y0+altura);
     }
     
     public int getX0(){

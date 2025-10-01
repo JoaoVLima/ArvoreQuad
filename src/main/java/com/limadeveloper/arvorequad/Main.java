@@ -17,6 +17,10 @@ public class Main {
         arvore.inserir(60,60);
         arvore.inserir(70,70);
         arvore.inserir(0,50);
+
+        arvore.inserir(80,70);
+        arvore.inserir(80,80);
+        arvore.inserir(90,90);
         arvore.imprimir();
     }
 }

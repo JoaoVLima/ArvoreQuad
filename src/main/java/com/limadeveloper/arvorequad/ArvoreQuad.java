@@ -82,26 +82,26 @@ public class ArvoreQuad {
         int largura = quadrante.getLargura();
         int altura = quadrante.getAltura();
         
-        int metade_x = (int) (largura-x0)/2;
-        int metade_y = (int) (altura-y0)/2;
+        int metade_x = (int) largura/2;
+        int metade_y = (int) altura/2;
         
         int esquerda_cima_x0 = x0;
         int esquerda_cima_y0 = y0;
         int esquerda_cima_largura = metade_x;
         int esquerda_cima_altura = metade_y;
         
-        int direita_cima_x0 = metade_x;
+        int direita_cima_x0 = x0+metade_x;
         int direita_cima_y0 = y0;
         int direita_cima_largura = metade_x;
         int direita_cima_altura = metade_y;
-        
-        int esquerda_baixo_y0 = metade_y;
+
         int esquerda_baixo_x0 = x0;
+        int esquerda_baixo_y0 = y0+metade_y;
         int esquerda_baixo_largura = metade_x;
         int esquerda_baixo_altura = metade_y;
         
-        int direita_baixo_x0 = metade_x;
-        int direita_baixo_y0 = metade_y;
+        int direita_baixo_x0 = x0+metade_x;
+        int direita_baixo_y0 = y0+metade_y;
         int direita_baixo_largura = metade_x;
         int direita_baixo_altura = metade_y;
         
@@ -122,20 +122,20 @@ public class ArvoreQuad {
     }
     
     public void imprimir(){
-        System.out.print("\t");
-        int count = 1;
+        int count = 0;
         imprimir(count);
     }
     
     public void imprimir(int count){
         System.out.print("\t".repeat(count));
+        System.out.println("Quadrante");
         if(dividido){
-            esquerda_cima.imprimir(count);
-            direita_cima.imprimir(count);
-            esquerda_baixo.imprimir(count);
-            direita_baixo.imprimir(count);
+            esquerda_cima.imprimir(count+1);
+            direita_cima.imprimir(count+1);
+            esquerda_baixo.imprimir(count+1);
+            direita_baixo.imprimir(count+1);
         }else{
-            quadrante.imprimir(count);
+            quadrante.imprimir(count+1);
         }
     }
 }
