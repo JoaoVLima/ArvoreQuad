@@ -6,6 +6,10 @@ Arvore Quad, uma Arvore Multiway que pode ser usada em varias aplicacoes interes
 mvn compile exec:java
 ```
 
+<img width="1594" height="791" alt="image" src="https://github.com/user-attachments/assets/225cc42c-57de-4c75-96e8-26163810a072" />
+<img width="399" height="241" alt="image" src="https://github.com/user-attachments/assets/2e080f28-63e4-4995-9777-5e719b338138" />
+
+
 ### Como usar:
 ```
 ArvoreQuad arvore = new ArvoreQuad(4, 0, 0, 100, 100);
