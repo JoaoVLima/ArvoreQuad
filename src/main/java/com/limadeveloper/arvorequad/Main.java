@@ -26,22 +26,22 @@ public class Main {
         arvore.imprimir();
         
         Node a = arvore.buscarNode(70, 70);
-        a.imprime();
+        a.imprimeln();
         
         a = arvore.remover(60,60);
-        a.imprime();
+        a.imprimeln();
         a = arvore.remover(70,70);
-        a.imprime();
+        a.imprimeln();
         a = arvore.remover(80,70);
-        a.imprime();
+        a.imprimeln();
         a = arvore.remover(80,80);
-        a.imprime();
+        a.imprimeln();
         
         arvore.imprimir();
         
         
         a = arvore.remover(90,90);
-        a.imprime();
+        a.imprimeln();
         
         arvore.imprimir();
     }

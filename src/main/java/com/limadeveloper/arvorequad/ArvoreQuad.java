@@ -190,6 +190,8 @@ public class ArvoreQuad {
                 esquerda_baixo = null;
                 direita_baixo = null;
                 
+                dividido = false;
+                
             }else{
                 System.out.println("tem coisa ai dentro");
             }
@@ -214,6 +216,34 @@ public class ArvoreQuad {
             }
         }else{
             retorno = quadrante.buscarNode(x,y);
+            if (retorno == null){
+                System.out.println("nao achei");
+            }
+        }
+        return retorno;
+    }
+    
+    public Node remover(int x, int y){
+        Node retorno = null;
+        if(dividido){
+            if (esquerda_cima.taNoQuadrante(x,y)){
+                retorno = esquerda_cima.remover(x, y);
+            }else if (direita_cima.taNoQuadrante(x,y)){
+                retorno = direita_cima.remover(x, y);
+            }else if (esquerda_baixo.taNoQuadrante(x,y)){
+                retorno = esquerda_baixo.remover(x, y);
+            }else if (direita_baixo.taNoQuadrante(x,y)){
+                retorno = direita_baixo.remover(x, y);
+            }else{
+                System.out.println("não é aqui não");
+            }
+            
+            if(is_vazia()){
+                unir();
+            }
+            
+        }else{
+            retorno = quadrante.remover(x,y);
             if (retorno == null){
                 System.out.println("nao achei");
             }

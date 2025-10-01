@@ -64,6 +64,10 @@ public class Quadrante {
         return nodes.removePrimeiro();
     }
     
+    public Node remover(int x, int y){
+        return nodes.remove(x, y);
+    }
+    
     public boolean inserir(int x, int y){
         if(nodes.cheia()){
             System.out.println("ta cheia");
@@ -74,17 +78,11 @@ public class Quadrante {
             return false;
         }
         nodes.insereOrdenado(x, y);
-        return true;
-        
-        
+        return true; 
     }
     
     public Node buscarNode(int x, int y){
-        
-    }
-    
-    public void remover(int x, int y){
-        nodes.remove(x, y);
+        return nodes.buscarNode(x,y);
     }
     
     public void imprimir(){
