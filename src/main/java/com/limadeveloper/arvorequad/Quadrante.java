@@ -32,6 +32,10 @@ public class Quadrante {
         return nodes.cheia();
     }
     
+    public boolean vazia(){
+        return nodes.vazia();
+    }
+    
     public boolean taNoQuadrante(int x, int y){
         return (x>=x0 && x<=x0+largura) && (y>=y0 && y<=y0+altura);
     }
@@ -72,6 +76,10 @@ public class Quadrante {
         nodes.insereOrdenado(x, y);
         return true;
         
+        
+    }
+    
+    public Node buscarNode(int x, int y){
         
     }
     

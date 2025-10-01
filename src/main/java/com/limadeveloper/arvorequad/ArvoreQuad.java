@@ -71,6 +71,17 @@ public class ArvoreQuad {
         return retorno;
     }
     
+    public boolean is_vazia(){
+        if (dividido){
+            return (esquerda_cima.is_vazia() 
+                    && direita_cima.is_vazia() 
+                    && esquerda_baixo.is_vazia()
+                    && direita_baixo.is_vazia());
+        }else{
+            return quadrante.vazia();
+        }
+    }
+    
     public void dividir(){
         if(dividido){
             System.out.println("ja ta dividido, loco");
@@ -119,6 +130,95 @@ public class ArvoreQuad {
         }
         
         
+    }
+    
+    public int getX0(){
+        if(dividido){
+            return esquerda_cima.getX0();
+        } else{
+            return quadrante.getX0();
+        }
+    }
+    
+    public int getY0(){
+        if(dividido){
+            return esquerda_cima.getY0();
+        } else{
+            return quadrante.getY0();
+        }
+    }
+    
+    public int getLargura(){
+        if(dividido){
+            return esquerda_cima.getLargura()+direita_cima.getLargura();
+        } else{
+            return quadrante.getLargura();
+        }
+    }
+    
+    public int getAltura(){
+        if(dividido){
+            return esquerda_cima.getAltura()+esquerda_baixo.getAltura();
+        } else{
+            return quadrante.getAltura();
+        }
+    }
+    
+    public int getNumMaxNodes(){
+        if(dividido){
+            return esquerda_cima.getNumMaxNodes();
+        } else{
+            return quadrante.getNumMaxNodes();
+        }
+    }
+    
+    public void unir(){
+        if(dividido){
+            if (is_vazia()){
+                int x0 = getX0();
+                int y0 = getY0();
+                
+                int largura = getLargura();
+                int altura = getAltura();
+                
+                int num_max_nodes = getNumMaxNodes();
+                
+                quadrante = new Quadrante(num_max_nodes, x0, y0, largura, altura);
+                
+                esquerda_cima = null;
+                direita_cima = null;
+                esquerda_baixo = null;
+                direita_baixo = null;
+                
+            }else{
+                System.out.println("tem coisa ai dentro");
+            }
+        }else{
+            System.out.println("ja esta unido");
+        }
+    }
+    
+    public Node buscarNode(int x, int y){
+        Node retorno = null;
+        if(dividido){
+            if (esquerda_cima.taNoQuadrante(x,y)){
+                retorno = esquerda_cima.buscarNode(x, y);
+            }else if (direita_cima.taNoQuadrante(x,y)){
+                retorno = direita_cima.buscarNode(x, y);
+            }else if (esquerda_baixo.taNoQuadrante(x,y)){
+                retorno = esquerda_baixo.buscarNode(x, y);
+            }else if (direita_baixo.taNoQuadrante(x,y)){
+                retorno = direita_baixo.buscarNode(x, y);
+            }else{
+                System.out.println("não é aqui não");
+            }
+        }else{
+            retorno = quadrante.buscarNode(x,y);
+            if (retorno == null){
+                System.out.println("nao achei");
+            }
+        }
+        return retorno;
     }
     
     public void imprimir(){

@@ -36,6 +36,24 @@ public class ListaEncadeada {
             return false;
         }
     }
+    
+    public Node buscarNode(int x, int y){
+        if (vazia()){
+            return null;
+        }
+        
+        Node atual = Lista;
+        while (atual.getProximo() != null || (atual.getX()!=x && atual.getY()!=y)) {
+            atual = atual.getProximo();
+        }
+        
+        if (atual.getX()!=x && atual.getY()!=y){
+            return null;
+        }
+        
+        return atual;
+        
+    }
 
     //Inserindo elementos
     public void insereUltimo(int x, int y) {

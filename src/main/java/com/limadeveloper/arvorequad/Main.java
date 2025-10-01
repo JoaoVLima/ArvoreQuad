@@ -4,6 +4,8 @@
  */
 package com.limadeveloper.arvorequad;
 
+import com.limadeveloper.listaencadeada.Node;
+
 /**
  *
  * @author Lima
@@ -21,6 +23,26 @@ public class Main {
         arvore.inserir(80,70);
         arvore.inserir(80,80);
         arvore.inserir(90,90);
+        arvore.imprimir();
+        
+        Node a = arvore.buscarNode(70, 70);
+        a.imprime();
+        
+        a = arvore.remover(60,60);
+        a.imprime();
+        a = arvore.remover(70,70);
+        a.imprime();
+        a = arvore.remover(80,70);
+        a.imprime();
+        a = arvore.remover(80,80);
+        a.imprime();
+        
+        arvore.imprimir();
+        
+        
+        a = arvore.remover(90,90);
+        a.imprime();
+        
         arvore.imprimir();
     }
 }
