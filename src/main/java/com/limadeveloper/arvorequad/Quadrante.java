@@ -70,11 +70,11 @@ public class Quadrante {
     
     public boolean inserir(int x, int y){
         if(nodes.cheia()){
-            System.out.println("ta cheia");
+            System.out.println("Quadrante está cheio.");
             return false;
         }
         if(!taNoQuadrante(x,y)){
-            System.out.println("não é aqui não");
+            System.out.println("O ponto ("+x+","+y+") não pertence a este quadrante.");
             return false;
         }
         nodes.insereOrdenado(x, y);
@@ -93,6 +93,5 @@ public class Quadrante {
         System.out.print("\t".repeat(count));
         nodes.imprime();
     }
-    
     
 }

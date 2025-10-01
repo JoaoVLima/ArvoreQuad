@@ -11,19 +11,22 @@ import com.limadeveloper.listaencadeada.Node;
  * @author Lima
  */
 public class ArvoreQuad {
+    // Cada ArvoreQuad representa uma região do espaço (um quadrante)
     private Quadrante quadrante;
     private boolean dividido;
     
-    // se foi dividido, usa essas variaveis
+    // Se foi dividido, usa as 4 subdivisões
     private ArvoreQuad esquerda_cima;
     private ArvoreQuad direita_cima;
     private ArvoreQuad esquerda_baixo;
     private ArvoreQuad direita_baixo;
     
+    // Construtor inicializa o quadrante raiz
     ArvoreQuad(int num_max_nodes, int x0, int y0, int largura, int altura){
         this.quadrante = new Quadrante(num_max_nodes, x0, y0, largura, altura);
     }
     
+    // Verifica se o ponto (x,y) pertence a este quadrante ou subquadrantes
     public boolean taNoQuadrante(int x, int y){
         if(dividido){
             if (esquerda_cima.taNoQuadrante(x,y)){
@@ -35,7 +38,7 @@ public class ArvoreQuad {
             }else if (direita_baixo.taNoQuadrante(x,y)){
                 return direita_baixo.taNoQuadrante(x,y);
             }else{
-                System.out.println("não é aqui não");
+                System.out.println("O ponto ("+x+","+y+") não pertence a este quadrante.");
                 return false;
             }
         }else{
@@ -43,6 +46,8 @@ public class ArvoreQuad {
         }
     }
     
+    
+    // Insere um ponto (x,y) neste quadrante ou no subquadrante
     public boolean inserir(int x, int y){
         boolean retorno = false;
         if(dividido){
@@ -55,15 +60,16 @@ public class ArvoreQuad {
             }else if (direita_baixo.taNoQuadrante(x,y)){
                 retorno = direita_baixo.inserir(x, y);
             }else{
-                System.out.println("não é aqui não");
+                System.out.println("O ponto ("+x+","+y+") não pertence a este quadrante.");
             }
         }else{
+            // Tenta inserir no quadrante
             retorno = quadrante.inserir(x,y);
-            if (!retorno){
-                if (quadrante.cheia()){
-                    System.out.println("Dividir");
+            if (!retorno){ // Caso falhe
+                if (quadrante.cheia()){ // Verifica se esta cheia
+                    System.out.println("Dividir"); // Caso cheia, divide em quadrantes
                     dividir();
-                    retorno = inserir(x,y);
+                    retorno = inserir(x,y); // insere o ponto que a pessoa queria inserir
                     quadrante = null;
                 }
             }
@@ -82,40 +88,51 @@ public class ArvoreQuad {
         }
     }
     
+    // Dividir o quadrante em 4 subquadrantes
     public void dividir(){
         if(dividido){
-            System.out.println("ja ta dividido, loco");
+            System.out.println("Esse quadrante ja foi dividido.");
             return; 
         }
+        
+        // Informacoes do quadrante atual
         int num_max_nodes = quadrante.getNumMaxNodes();
         int x0 = quadrante.getX0();
         int y0 = quadrante.getY0();
         int largura = quadrante.getLargura();
         int altura = quadrante.getAltura();
         
+        // Divide largura e altura pela metade
         int metade_x = (int) largura/2;
         int metade_y = (int) altura/2;
         
+        // esquerda_cima
         int esquerda_cima_x0 = x0;
         int esquerda_cima_y0 = y0;
         int esquerda_cima_largura = metade_x;
         int esquerda_cima_altura = metade_y;
         
+        // direita_cima
         int direita_cima_x0 = x0+metade_x;
         int direita_cima_y0 = y0;
         int direita_cima_largura = metade_x;
         int direita_cima_altura = metade_y;
 
+        
+        // esquerda_baixo
         int esquerda_baixo_x0 = x0;
         int esquerda_baixo_y0 = y0+metade_y;
         int esquerda_baixo_largura = metade_x;
         int esquerda_baixo_altura = metade_y;
         
+        
+        // direita_baixo
         int direita_baixo_x0 = x0+metade_x;
         int direita_baixo_y0 = y0+metade_y;
         int direita_baixo_largura = metade_x;
         int direita_baixo_altura = metade_y;
         
+        // Criacao de subquadrantes
         esquerda_cima = new ArvoreQuad(num_max_nodes,esquerda_cima_x0,esquerda_cima_y0,esquerda_cima_largura, esquerda_cima_altura);
         direita_cima = new ArvoreQuad(num_max_nodes,direita_cima_x0,direita_cima_y0,direita_cima_largura,direita_cima_altura);
         esquerda_baixo = new ArvoreQuad(num_max_nodes,esquerda_baixo_x0,esquerda_baixo_y0,esquerda_baixo_largura,esquerda_baixo_altura);
@@ -123,6 +140,7 @@ public class ArvoreQuad {
         
         dividido = true;
         
+        // Reinsere os pontos nos seus respectivos quadrantes.
         Node no = quadrante.removerPrimeiro();
         while(no!=null){
             inserir(no.getX(), no.getY());
@@ -172,6 +190,7 @@ public class ArvoreQuad {
         }
     }
     
+    // Junta os subquadrantes em um quadrante
     public void unir(){
         if(dividido){
             if (is_vazia()){
@@ -193,10 +212,10 @@ public class ArvoreQuad {
                 dividido = false;
                 
             }else{
-                System.out.println("tem coisa ai dentro");
+                System.out.println("Não é possivel unir, pois existem pontos a dentro dos subquadrantes.");
             }
         }else{
-            System.out.println("ja esta unido");
+            System.out.println("jJa está unido em um quadrante.");
         }
     }
     
@@ -212,12 +231,12 @@ public class ArvoreQuad {
             }else if (direita_baixo.taNoQuadrante(x,y)){
                 retorno = direita_baixo.buscarNode(x, y);
             }else{
-                System.out.println("não é aqui não");
+                System.out.println("O ponto ("+x+","+y+") não pertence a este quadrante.");
             }
         }else{
             retorno = quadrante.buscarNode(x,y);
             if (retorno == null){
-                System.out.println("nao achei");
+                System.out.println("O ponto ("+x+","+y+") não pertence a este quadrante.");
             }
         }
         return retorno;
@@ -235,7 +254,7 @@ public class ArvoreQuad {
             }else if (direita_baixo.taNoQuadrante(x,y)){
                 retorno = direita_baixo.remover(x, y);
             }else{
-                System.out.println("não é aqui não");
+                System.out.println("O ponto ("+x+","+y+") não pertence a este quadrante.");
             }
             
             if(is_vazia()){
@@ -245,7 +264,7 @@ public class ArvoreQuad {
         }else{
             retorno = quadrante.remover(x,y);
             if (retorno == null){
-                System.out.println("nao achei");
+                System.out.println("O ponto ("+x+","+y+") não pertence a este quadrante.");
             }
         }
         return retorno;
